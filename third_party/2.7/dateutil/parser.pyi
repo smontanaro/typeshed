@@ -1,5 +1,5 @@
-from typing import List, Tuple, Optional, Callable, Union, IO, Any
-from datetime import datetime
+from typing import List, Tuple, Optional, Callable, Union, IO, Any, Dict
+from datetime import datetime, tzinfo
 
 __all__ = ...  # type: List[str]
 
@@ -28,10 +28,12 @@ class parserinfo(object):
 
 class parser(object):
     def __init__(self, info: Optional['parserinfo']) -> None: ...
-    def parse(self, timestr: str, default: Optional[datetime],
-              ignoretz: bool, tzinfos: Any,
+    def parse(self, timestr: Union[str, unicode, IO[unicode]],
+              default: Optional[datetime],
+              ignoretz: bool, tzinfos: Dict[Union[str, unicode], tzinfo],
               **kwargs: Dict[str, Any]) -> datetime: ...
 
 DEFAULTPARSER = ... # type: 'parser'
-def parse(timestr: str, parserinfo: Optional['parserinfo'],
+def parse(timestr: Union[str, unicode, IO[unicode]],
+          parserinfo: Optional['parserinfo'],
           **kwargs: Dict[str, Any]) -> datetime: ...
